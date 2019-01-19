@@ -1,8 +1,9 @@
 .PHONY: run
 
 run:
-	cd binaries && nim c -r \
-		--passL:'-L. -lraylib libraylib.a -framework OpenGL -framework IOKit -framework AppKit -framework CoreVideo' \
+	nim c -r \
+		--passL:'-Lbinaries -lraylib binaries/libraylib.a' \
+		--passL:'-framework OpenGL -framework IOKit -framework AppKit -framework CoreVideo' \
 		--cincludes:./binaries \
 		--verbosity:2 \
-		--out:demo ../demo.nim
+		--out:binaries/demo demo.nim

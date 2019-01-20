@@ -48,4 +48,19 @@ proc newColor*(r: cuchar, g: cuchar, b: cuchar, a: cuchar): Color =
   result.b = b
   result.a = a
 
+proc newColor*(r: uint8, g: uint8, b: uint8, a: uint8): Color =
+  result.r = (cuchar)r
+  result.g = (cuchar)g
+  result.b = (cuchar)b
+  result.a = (cuchar)a
+
+proc newColor*(r: cint, g: cint, b: cint, a: cint): Color =
+  result.r = (cuchar)r
+  result.g = (cuchar)g
+  result.b = (cuchar)b
+  result.a = (cuchar)a
+
+proc GetRandomFloat*(min: cfloat, max: cfloat): cfloat =
+  return cfloat(GetRandomValue(cint(min), cint(max)))
+
 export raylibimpl

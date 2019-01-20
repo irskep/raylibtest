@@ -7,7 +7,6 @@ let screenSize = newVector2(800, 450)
 
 SetConfigFlags(cuchar(FLAG_VSYNC_HINT))
 
-
 InitWindow((cint) screenSize.x, (cint) screenSize.y, "Hello world")
 SetTargetFPS(60)
 
@@ -24,15 +23,17 @@ SetCameraMode(camera, (cint) CAMERA_FIRST_PERSON)
 var twenty = newSeq[int](20)
 for i in countup(0, 19):
   twenty[i] = i
-let heights = map(twenty, proc(i: int): cfloat =
-  cfloat(GetRandomValue(1, 12)))
+
+let heights = map(twenty, proc(i: int): cfloat = GetRandomFloat(1, 12))
+
 let positions = map(twenty, proc(i: int): Vector3 =
   newVector3(
-    cfloat(GetRandomValue(-15, 15)),
+    GetRandomFloat(-15, 15),
     heights[i] / 2,
-    cfloat(GetRandomValue(-15, 15))))
+    GetRandomFloat(-15, 15)))
+
 let colors = map(twenty, proc(i: int): Color =
-  newColor(cuchar(GetRandomValue(20, 255)), cuchar(GetRandomValue(10, 55)), cuchar(30), cuchar(255)))
+  newColor(GetRandomValue(20, 255), GetRandomValue(10, 55), 30, 255))
 
 var wentFS = false
 let sw = GetScreenWidth()

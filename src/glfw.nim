@@ -1,4 +1,4 @@
-import glfw/wrapper
+import glfwimpl
 import tables
 import options
 from unicode import Rune

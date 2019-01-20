@@ -1,7 +1,7 @@
 import sequtils
 
 import glfw
-import "../raylib"
+import raynim
 
 proc run*() =
   let screenSize = newVector2(800, 450)

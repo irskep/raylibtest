@@ -1341,7 +1341,7 @@ RLAPI void SetAudioStreamVolume(AudioStream stream, float volume);    // Set vol
 RLAPI void SetAudioStreamPitch(AudioStream stream, float pitch);      // Set pitch for audio stream (1.0 is base level)
 
 /*
-Nim tweaks
+ * Nim tweaks: inline some missing types
  */
 
 // raudio.c

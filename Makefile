@@ -6,5 +6,5 @@ run:
 		--passL:'-Lbinaries -lraylib binaries/libraylib.a' \
 		--passL:'-framework OpenGL -framework IOKit -framework AppKit -framework CoreVideo' \
 		-d:glfwJustCdecl \
-		-d:runningForReal \
+		-d:raynimCompile \
 		--out:binaries/raylib_test src/raylibtests.nim # --verbosity:2

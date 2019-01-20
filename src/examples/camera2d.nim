@@ -1,4 +1,4 @@
-import "../raylib"
+import raynim
 
 let MAX_BUILDINGS = 100
 

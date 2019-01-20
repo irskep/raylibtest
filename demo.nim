@@ -12,11 +12,11 @@ set_target_fps(60)
 
 var camera: Camera3D# = newCamera3D(CAMERA_PERSPECTIVE, 45)
 camera.`type` = (cint) CAMERA_PERSPECTIVE
-# camera.mode=((cint)CAMERA_FREE)
-camera.position = newVector3(0, 10, 10)
+camera.position = newVector3(10, 10, 10)
 camera.target = newVector3(0, 0, 0)
 camera.up = newVector3(0, 1, 0)
 camera.fovy = 45
+camera.mode=((cint)CAMERA_FREE)
 
 let cubePosition = newVector3(0, 0, 0)
 

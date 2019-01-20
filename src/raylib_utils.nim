@@ -1,4 +1,4 @@
-import raylib 
+import "../../raylib-nim/src/raylib"
 
 proc newVector2*(x: cfloat, y: cfloat): Vector2 =
   result.x = x

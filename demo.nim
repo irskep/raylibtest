@@ -1,6 +1,6 @@
 import dynlib
-import raylib
-import "src/raylib_utils"
+import "../raylib-nim/src/raylib"
+import src/raylib_utils
 
 # Attempts to port various raylib examples to Nim.
 # Currently: https://github.com/raysan5/raylib/blob/master/examples/core/core_3d_camera_free.c
@@ -10,15 +10,19 @@ let screenSize = newVector2(800, 450)
 init_window((cint) screenSize.x, (cint) screenSize.y, "Hello world")
 set_target_fps(60)
 
-var camera: Camera3D = newCamera3D(CAMERA_PERSPECTIVE, 45)
-camera.position = newVector3(10, 10, 10)
+var camera: Camera3D# = newCamera3D(CAMERA_PERSPECTIVE, 45)
+camera.`type` = (cint) CAMERA_PERSPECTIVE
+# camera.mode=((cint)CAMERA_FREE)
+camera.position = newVector3(0, 10, 10)
 camera.target = newVector3(0, 0, 0)
+camera.up = newVector3(0, 1, 0)
+camera.fovy = 45
 
 let cubePosition = newVector3(0, 0, 0)
 
 while window_should_close() == 0:
 
-  update(unsafeAddr camera)
+  (addr camera).update()
 
   if key_down((cint) 'Z') == 1:
     camera.target = newVector3(0, 0, 0)
@@ -27,29 +31,6 @@ while window_should_close() == 0:
 
   clear_background(WHITE)
 
-  #[
-    HERE IS THE PROBLEM INE
-
-    C declaration:
-      RLAPI void BeginMode3D(Camera3D camera); // Initializes 3D mode with custom camera (3D)
-
-    Nim binding declaration:
-      https://github.com/Skrylar/raylib-nim/blob/master/src/raylibimpl/raylib_raylib.nim#L677
-      proc begin_mode3D*(camera: Camera3D)
-
-    Compiler error:
-
-      Error: execution of an external compiler program 'clang -c  -w  -I/Users/steve/.choosenim/toolchains/nim-0.19.2/lib -I/Users/steve/_d/scratch/raylibtests/./binaries -o /Users/steve/.cache/nim/demo_d/demo.c.o /Users/steve/.cache/nim/demo_d/demo.c' failedwith exit code: 1
-
-      /Users/steve/.cache/nim/demo_d/demo.c:210:16: error: passing 'Camera3D *' (aka 'struct Camera3D *') to parameter of incompatible type 'Camera3D' (aka 'struct Camera3D'); dereference with *
-                              BeginMode3D((&camera_YdOSHnfVGOQpp9aCewApXpA));
-                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                                          *
-      /Users/steve/_d/scratch/raylibtests/./binaries/raylib.h:872:33: note: passing argument to parameter 'camera' here
-      RLAPI void BeginMode3D(Camera3D camera);                          // Initializes 3D mode with custom camera (3D)
-                                      ^
-      1 error generated.
-  ]#
   camera.begin_mode3D()
 
   draw_cube(cubePosition, 2, 2, 2, RED)
@@ -57,6 +38,9 @@ while window_should_close() == 0:
 
   draw_grid(10, 1)
   end_mode3d()
+
+  draw_fps(10, 10)
+  draw_text("Welcome to the third dimension!", 10, 40, 20, DARKGRAY)
 
   end_drawing()
 

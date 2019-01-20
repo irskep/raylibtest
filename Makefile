@@ -5,6 +5,6 @@ run:
 	nim c -r \
 		--passL:'-Lbinaries -lraylib binaries/libraylib.a' \
 		--passL:'-framework OpenGL -framework IOKit -framework AppKit -framework CoreVideo' \
-		-d:glfwStaticLib \
+		-d:glfwJustCdecl \
 		-d:runningForReal \
-		--out:binaries/raylib_test demo.nim # --verbosity:2
+		--out:binaries/raylib_test src/raylibtests.nim # --verbosity:2

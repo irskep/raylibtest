@@ -1,6 +1,6 @@
 import sequtils
 
-import "../glfw"
+import glfw
 import "../raylib"
 
 proc run*() =

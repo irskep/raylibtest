@@ -11,4 +11,4 @@ type va_list* {.importc, bycopy, header:"<stdarg.h>".} = object
 cDebug()
 cIncludeDir("$projpath")
 cAddSearchDir("$projpath/src")
-cImport cSearchPath "raylib.h"
+cImport(cSearchPath("raylib.h"))

@@ -1,4 +1,7 @@
-import raylibimpl
+when defined(runningForReal):
+  import raylibimpl
+else:
+  import raylibstubs
 
 const
   LIGHTGRAY*  = Color(r: (cuchar)200, g: (cuchar)200, b: (cuchar)200, a: (cuchar)255)  ## Light Gray
@@ -37,6 +40,12 @@ proc newVector3*(x: cfloat, y: cfloat, z: cfloat): Vector3 =
   result.y = y
   result.z = z
 
+proc newRectangle*(x: cfloat, y: cfloat, w: cfloat, h: cfloat): Rectangle =
+  result.x = x
+  result.y = y
+  result.width = w
+  result.height = h
+
 proc newCamera3D*(`type`: CameraType, fovy: cfloat): Camera3D =
   result.fovy = fovy
   result.`type` = (cint) `type`
@@ -63,4 +72,7 @@ proc newColor*(r: cint, g: cint, b: cint, a: cint): Color =
 proc GetRandomFloat*(min: cfloat, max: cfloat): cfloat =
   return cfloat(GetRandomValue(cint(min), cint(max)))
 
-export raylibimpl
+when defined(runningForReal):
+  export raylibimpl
+else:
+  export raylibstubs

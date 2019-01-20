@@ -2,6 +2,9 @@ import dynlib
 import raylib
 import "src/raylib_utils"
 
+# Attempts to port various raylib examples to Nim.
+# Currently: https://github.com/raysan5/raylib/blob/master/examples/core/core_3d_camera_free.c
+
 let screenSize = newVector2(800, 450)
 
 init_window((cint) screenSize.x, (cint) screenSize.y, "Hello world")

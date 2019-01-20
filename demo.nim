@@ -13,8 +13,6 @@ camera.target = newVector3(0, 0, 0)
 
 let cubePosition = newVector3(0, 0, 0)
 
-# `mode=`(camera, (cint) CAMERA_FREE)
-
 while window_should_close() == 0:
 
   update(unsafeAddr camera)
@@ -26,6 +24,29 @@ while window_should_close() == 0:
 
   clear_background(WHITE)
 
+  #[
+    HERE IS THE PROBLEM INE
+
+    C declaration:
+      RLAPI void BeginMode3D(Camera3D camera); // Initializes 3D mode with custom camera (3D)
+
+    Nim binding declaration:
+      https://github.com/Skrylar/raylib-nim/blob/master/src/raylibimpl/raylib_raylib.nim#L677
+      proc begin_mode3D*(camera: Camera3D)
+
+    Compiler error:
+
+      Error: execution of an external compiler program 'clang -c  -w  -I/Users/steve/.choosenim/toolchains/nim-0.19.2/lib -I/Users/steve/_d/scratch/raylibtests/./binaries -o /Users/steve/.cache/nim/demo_d/demo.c.o /Users/steve/.cache/nim/demo_d/demo.c' failedwith exit code: 1
+
+      /Users/steve/.cache/nim/demo_d/demo.c:210:16: error: passing 'Camera3D *' (aka 'struct Camera3D *') to parameter of incompatible type 'Camera3D' (aka 'struct Camera3D'); dereference with *
+                              BeginMode3D((&camera_YdOSHnfVGOQpp9aCewApXpA));
+                                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                          *
+      /Users/steve/_d/scratch/raylibtests/./binaries/raylib.h:872:33: note: passing argument to parameter 'camera' here
+      RLAPI void BeginMode3D(Camera3D camera);                          // Initializes 3D mode with custom camera (3D)
+                                      ^
+      1 error generated.
+  ]#
   camera.begin_mode3D()
 
   draw_cube(cubePosition, 2, 2, 2, RED)

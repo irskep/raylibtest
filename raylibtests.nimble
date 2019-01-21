@@ -10,4 +10,4 @@ bin           = @["binaries/raylib_test"]
 
 # Dependencies
 
-requires "nim >= 0.19.2", "https://github.com/irskep/nim-glfw#raw-cdecls"
+requires "nim >= 0.19.2", "https://github.com/irskep/nim-glfw#raw-cdecls", "https://github.com/irskep/raynim#head"
